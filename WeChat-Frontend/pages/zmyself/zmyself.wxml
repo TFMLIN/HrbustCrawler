@@ -1,0 +1,15 @@
+<view>
+    <image class="beijing" src="/IMG_3360.jpeg" mode="aspectFill"></image>
+    <view class="txkuang">
+        <button wx:if="{{buttonhidden}}" type="primary" class="login-btn" size="mini" catchtap="getUserProfile">登陆</button>
+    </view>
+    <view class="text" wx:if="{{!buttonhidden}}">用户 : {{user}}</view>
+    <view class="text" wx:if="{{!buttonhidden}}">{{studentType}}</view>
+    <view class="tishi">
+        <view class="dengdai">请于7:00-23:20 登陆或拉取课程表</view>
+        <!-- <view class="dengdai">拉取课表需要5s左右</view> -->
+    </view>
+    <view class="pull">
+        <button size="mini" type="primary" wx:if="{{!buttonhidden}}" catchtap="pullAllCoure">拉取所有课程表</button>
+    </view>
+</view>

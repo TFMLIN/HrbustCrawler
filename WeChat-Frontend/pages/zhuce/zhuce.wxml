@@ -1,0 +1,24 @@
+<view class="container">
+    <form bindsubmit="submit">
+        <image src="/Harbin_University_of_Science_and_Technology_logo.png" mode="aspectFit" />
+        <view class="inputRow">
+            <view> 账号 </view>
+            <input type="number" placeholder="请输入账号" class="phone_number" name="user"> </input>
+        </view>
+        <view class="inputRow1">
+            <viev>密码</viev>
+            <input type="text" password="true" placeholder="请输入密码" class="phone_number" name="password"> </input>
+        </view>
+
+        <radio-group bindchange="radioChange" class="radioGroup" name="radio">
+            <label class="weui-cell weui-check__label" wx:for="{{items}}" wx:key="value">
+                <view class="weui-cell__hd">
+                    <radio value="{{item.value}}"/>
+                </view>
+                <view class="weui-cell__bd">{{item.name}}</view>
+            </label>
+        </radio-group>
+
+        <button class="buttonStyle" type="primary" form-type="submit"> 登陆 </button>
+    </form>
+</view>
