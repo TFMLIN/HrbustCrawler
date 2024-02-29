@@ -56,7 +56,7 @@ Page({
                             })
                         } else {
                             wx.showToast({
-                                title: "拉取失败..",
+                                title: "拉取失败.." + res.data.error,
                                 icon: 'none',
                                 duration: 1800
                             })

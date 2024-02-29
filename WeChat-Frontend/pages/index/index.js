@@ -18,7 +18,8 @@ Page({
             { "xqj": 5, "skjc": 1, "skcd": 2, "kcmc": "高等数学@教A-301", "CourseLocation": "教A-301", "teacher": "张三" },
             { "xqj": 6, "skjc": 3, "skcd": 2, "kcmc": "高等数学@教A-301", "CourseLocation": "教A-301", "teacher": "张三" },
             { "xqj": 7, "skjc": 5, "skcd": 3, "kcmc": "高等数学@教A-301", "CourseLocation": "教A-301", "teacher": "张三" },
-        ]
+        ],
+        OtherCourses:[]
     },
     identy: function (e, ...args) {
         wx.getStorage({
@@ -37,6 +38,8 @@ Page({
                 }
                 console.log("weekreq : " + weekreq)
                 // console.log(res.data.authentication)
+
+                // 有时间和地点的课程
                 wx.request({
                     // url: 'http://127.0.0.1:8080/getweekcoure/' + weekreq,
                     url: 'https://zzyan.com/getweekcoure/' + weekreq,
@@ -88,6 +91,43 @@ Page({
                             icon: 'none',
                             duration: 1800
                         })
+                    },
+                }),
+
+                // 没有时间或地点的课程
+                wx.request({
+                    // url: 'http://127.0.0.1:8080/getweekcoure/0' ,
+                    url: 'https://zzyan.com/getweekcoure/0',
+                    method: 'POST',
+                    header: {
+                        'content-type': 'application/x-www-form-urlencoded',
+                        "cookie": res.data.authentication,
+                    },
+                    data: {
+                        username: res.data.user,
+                        password: res.data.password,
+                        studentType: res.data.radio,
+                    },
+                    success: (res) => {
+                        console.log(res)
+                        if (res.statusCode == 200) {
+                            // 成功获取到数据
+                            console.log(res.data)
+                            var netlist = new Array();
+                            if (res.data != null) {
+                                res.data.forEach((item) => {
+                                    netlist.push({
+                                        CourseContent: item.CourseContent,
+                                        TeacherName: item.TeacherName,
+                                        BeginWeek:item.BeginWeek,
+                                        EndWeek: item.EndWeek,
+                                    })
+                                })
+                            }
+                            this.setData({
+                                OtherCourses: netlist
+                            })
+                        }
                     },
                 })
             },

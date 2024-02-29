@@ -87,3 +87,11 @@
     border: 10rpx solid transparent;
     border-top-color: #fff;
 }
+
+.noplace{
+    text-align: center;
+}
+.othercourses{
+    display:flex;
+    justify-content:space-between;
+}

@@ -3,7 +3,7 @@
         <image src="/Harbin_University_of_Science_and_Technology_logo.png" mode="aspectFit" />
         <view class="inputRow">
             <view> 账号 </view>
-            <input type="number" placeholder="请输入账号" class="phone_number" name="user"> </input>
+            <input type="text" placeholder="请输入账号" class="phone_number" name="user"> </input>
         </view>
         <view class="inputRow1">
             <viev>密码</viev>

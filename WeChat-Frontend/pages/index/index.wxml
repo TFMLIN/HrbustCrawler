@@ -40,5 +40,17 @@
         </view>
 
     </view>
+
+    <view>
+        <view class="noplace">没有时间和地点的课程</view>
+        <view wx:for="{{OtherCourses}}" wx:key="index">
+            <view  class="othercourses">
+                <view>{{item.CourseContent}}</view>
+                <view>{{item.TeacherName}}</view>
+                <view>{{item.BeginWeek}}-{{item.EndWeek}}周</view>
+            </view>
+        </view>
+    </view>
+
     <!-- </scroll-view> -->
 </view>
