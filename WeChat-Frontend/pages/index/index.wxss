@@ -92,6 +92,19 @@
     text-align: center;
 }
 .othercourses{
-    display:flex;
-    justify-content:space-between;
+    display: grid;
+    justify-content: flex-start;
+    grid-template-columns: repeat(3, 33.33%);
+    /* background-color: aquamarine; */
+}
+
+.othercourses > .card {
+  background-color: rgb(185, 250, 255);
+  font-size: small;
+}
+
+.card{
+  background-color: antiquewhite;
+  margin: 2px;
+  border-radius: 2%;
 }

@@ -6,6 +6,9 @@
         "pages/zmyself/zmyself",
         "pages/zhuce/zhuce"
     ],
+    "resolveAlias": {
+      "@/utils/*": "utils/*"
+    },
     "window": {
         "backgroundColor": "#F5F5F6",
         "backgroundTextStyle": "dark",

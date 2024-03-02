@@ -42,12 +42,18 @@
     </view>
 
     <view>
-        <view class="noplace">没有时间和地点的课程</view>
+        <view class="noplace card">没有时间和地点的课程</view>
+        <view class="othercourses">
+          <view class="card">课程名称</view>
+          <view class="card">任课老师</view>
+          <view class="card">上课时间</view>
+        </view>
+        
         <view wx:for="{{OtherCourses}}" wx:key="index">
             <view  class="othercourses">
-                <view>{{item.CourseContent}}</view>
-                <view>{{item.TeacherName}}</view>
-                <view>{{item.BeginWeek}}-{{item.EndWeek}}周</view>
+                <view class="card">{{item.CourseContent}}</view>
+                <view class="card">{{item.TeacherName}}</view>
+                <view class="card">{{item.BeginWeek}}-{{item.EndWeek}}周</view>
             </view>
         </view>
     </view>
