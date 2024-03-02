@@ -19,7 +19,7 @@ Page({
             { "xqj": 6, "skjc": 3, "skcd": 2, "kcmc": "高等数学@教A-301", "CourseLocation": "教A-301", "teacher": "张三" },
             { "xqj": 7, "skjc": 5, "skcd": 3, "kcmc": "高等数学@教A-301", "CourseLocation": "教A-301", "teacher": "张三" },
         ],
-        OtherCourses:[]
+        OtherCourses: []
     },
     identy: function (e, ...args) {
         wx.getStorage({
@@ -29,11 +29,13 @@ Page({
                 wx.showLoading({
                     title: '请求中...',
                 })
-                var weekreq
+                var weekreq, refesh
                 if (args.length > 0) {
                     weekreq = args[0]
+                    refesh = args[1]
                 }
                 else {
+                    refesh = 0
                     weekreq = parseInt(e.detail.value, 10) + 1
                 }
                 console.log("weekreq : " + weekreq)
@@ -92,44 +94,46 @@ Page({
                             duration: 1800
                         })
                     },
-                }),
+                });
 
                 // 没有时间或地点的课程
-                wx.request({
-                    // url: 'http://127.0.0.1:8080/getweekcoure/0' ,
-                    url: 'https://zzyan.com/getweekcoure/0',
-                    method: 'POST',
-                    header: {
-                        'content-type': 'application/x-www-form-urlencoded',
-                        "cookie": res.data.authentication,
-                    },
-                    data: {
-                        username: res.data.user,
-                        password: res.data.password,
-                        studentType: res.data.radio,
-                    },
-                    success: (res) => {
-                        console.log(res)
-                        if (res.statusCode == 200) {
-                            // 成功获取到数据
-                            console.log(res.data)
-                            var netlist = new Array();
-                            if (res.data != null) {
-                                res.data.forEach((item) => {
-                                    netlist.push({
-                                        CourseContent: item.CourseContent,
-                                        TeacherName: item.TeacherName,
-                                        BeginWeek:item.BeginWeek,
-                                        EndWeek: item.EndWeek,
+                if (refesh == 1) {
+                    wx.request({
+                        // url: 'http://127.0.0.1:8080/getweekcoure/0' ,
+                        url: 'https://zzyan.com/getweekcoure/0',
+                        method: 'POST',
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded',
+                            "cookie": res.data.authentication,
+                        },
+                        data: {
+                            username: res.data.user,
+                            password: res.data.password,
+                            studentType: res.data.radio,
+                        },
+                        success: (res) => {
+                            console.log(res)
+                            if (res.statusCode == 200) {
+                                // 成功获取到数据
+                                console.log(res.data)
+                                var netlist = new Array();
+                                if (res.data != null) {
+                                    res.data.forEach((item) => {
+                                        netlist.push({
+                                            CourseContent: item.CourseContent,
+                                            TeacherName: item.TeacherName,
+                                            BeginWeek: item.BeginWeek,
+                                            EndWeek: item.EndWeek,
+                                        })
                                     })
+                                }
+                                this.setData({
+                                    OtherCourses: netlist
                                 })
                             }
-                            this.setData({
-                                OtherCourses: netlist
-                            })
-                        }
-                    },
-                })
+                        },
+                    })
+                }
             },
             fail: () => {
                 // 未找到对应的 key 或获取失败
@@ -174,6 +178,6 @@ Page({
         var gapday = parseInt((currentDate - StartData) / 86400000)
         var week = parseInt(gapday / 7)
 
-        this.identy(e, week + 1);
+        this.identy(e, week + 1, 1);
     }
 })
